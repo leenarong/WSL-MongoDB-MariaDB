@@ -1,0 +1,33 @@
+INSTALL Nodejs MongoDB MariaDB ON WSL (ORACLE LINUX 8.5)
+1. sudo yum update && sudo yum upgrade
+2. curl -sL https://rpm.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+3. cat /tmp/nodesource_setup.sh
+4. sudo bash /tmp/nodesource_setup.sh
+5. sudo yum install nodejs
+6. node -v
+7. npm -v
+8. sudo vi /etc/yum.repos.d/mongodb-org-5.0.repo
+    [mongodb-org-5.0]
+    name=MongoDB Repository
+    baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/5.0/x86_64/
+    gpgcheck=1
+    enabled=1
+    gpgkey=https://www.mongodb.org/static/pgp/server-5.0.asc
+9. sudo yum install -y mongodb-org
+10. /var/lib/mongo (the data directory)
+    /var/log/mongodb (the log directory)
+11. sudo mkdir -p /data/db
+12. sudo chown -R `id -un` /data/db
+13. mongod --version
+14. sudo vi /etc/init.d/mongodb
+15. https://github.com/mongodb/mongo/blob/master/rpm/init.d-mongod
+16. sudo chmod +x /etc/init.d/mongodb
+17. sudo service mongodb restart
+18. mongo
+19. db.version()
+20. curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash
+21. sudo yum install MariaDB-server MariaDB-client MariaDB-backup
+22. sudo cp /usr/share/mysql/mysql.server /etc/init.d/mariadb
+23. sudo chmod +x /etc/init.d/mariadb
+24. sudo service mariadb restart
+25. sudo mariadb-secure-installation
